@@ -1,0 +1,21 @@
+.DS_Store
+node_modules/
+dist/
+dist-ssr/
+coverage/
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# vite
+.env.local
+.env.*.local

@@ -1,0 +1,4 @@
+com/aoop/crudapi/repository/BookRepository.class
+com/aoop/crudapi/entity/Book.class
+com/aoop/crudapi/CrudApiApplication.class
+com/aoop/crudapi/controller/BookController.class

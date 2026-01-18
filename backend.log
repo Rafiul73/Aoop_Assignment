@@ -1,0 +1,118 @@
+nohup: ignoring input
+🚀 Starting Spring Boot Backend
+===============================
+API will be available at: http://localhost:8080
+
+[WARNING] Unable to find the root directory. Create a .mvn directory in the root directory or add the root="true" attribute on the root project's model to identify it.
+[INFO] Scanning for projects...
+[INFO] Loaded 21945 auto-discovered prefixes for remote repository central (prefixes-central.txt)
+[WARNING] 
+[WARNING] 1 problem was encountered while building the effective model for 'com.aoop:crud-api:jar:1.0.0' (use -e to see details)
+[WARNING] 
+[WARNING] Total model problems reported: 1
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] -------------------------< com.aoop:crud-api >--------------------------
+[INFO] Building CRUD API 1.0.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] Loaded 74 auto-discovered prefixes for remote repository apache.snapshots (prefixes-apache.snapshots-c1d4c55f9308e5ac18a4069bed41dca64d85c515.txt)
+[WARNING] Could not transfer metadata /.meta/prefixes.txt from/to plexus.snapshots-9dedea94451709299d055319c137abeb30aacdef (https://oss.sonatype.org/content/repositories/plexus-snapshots): HTTP Status: 503
+[INFO] 
+[INFO] >>> spring-boot:3.2.1:run (default-cli) > test-compile @ crud-api >>>
+[WARNING] 1 problem was encountered while building the effective model for 'org.springframework.data:spring-data-jpa:jar:3.2.1' during dependency collection step for project (use -X to see details)
+[WARNING] 1 problem was encountered while building the effective model for 'org.springframework.data:spring-data-commons:jar:3.2.1' during dependency collection step for project (use -X to see details)
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ crud-api ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ crud-api ---
+[INFO] Changes detected - recompiling the module! :source
+[INFO] Compiling 4 source files with javac [debug release 17] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ crud-api ---
+[INFO] skip non existing resourceDirectory /workspaces/Aoop_Assignment/backend/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.11.0:testCompile (default-testCompile) @ crud-api ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] <<< spring-boot:3.2.1:run (default-cli) < test-compile @ crud-api <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:3.2.1:run (default-cli) @ crud-api ---
+[INFO] Loaded 50 auto-discovered prefixes for remote repository ow2-snapshot (prefixes-ow2-snapshot-40669f8efefaadb4c1705a2585cefc8851f735ac.txt)
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.1)
+
+2026-01-18T17:07:18.469Z  INFO 17669 --- [crud-api] [           main] com.aoop.crudapi.CrudApiApplication      : Starting CrudApiApplication using Java 25.0.1 with PID 17669 (/workspaces/Aoop_Assignment/backend/target/classes started by codespace in /workspaces/Aoop_Assignment/backend)
+2026-01-18T17:07:18.485Z  INFO 17669 --- [crud-api] [           main] com.aoop.crudapi.CrudApiApplication      : No active profile set, falling back to 1 default profile: "default"
+2026-01-18T17:07:19.373Z  INFO 17669 --- [crud-api] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-01-18T17:07:19.447Z  INFO 17669 --- [crud-api] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 64 ms. Found 1 JPA repository interface.
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by org.apache.tomcat.jni.Library in an unnamed module (file:/home/codespace/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.17/tomcat-embed-core-10.1.17.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+2026-01-18T17:07:20.244Z  INFO 17669 --- [crud-api] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-01-18T17:07:20.260Z  INFO 17669 --- [crud-api] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-01-18T17:07:20.260Z  INFO 17669 --- [crud-api] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.17]
+2026-01-18T17:07:20.327Z  INFO 17669 --- [crud-api] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-01-18T17:07:20.328Z  INFO 17669 --- [crud-api] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1715 ms
+2026-01-18T17:07:20.369Z  INFO 17669 --- [crud-api] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-01-18T17:07:20.544Z  INFO 17669 --- [crud-api] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2026-01-18T17:07:20.545Z  INFO 17669 --- [crud-api] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-01-18T17:07:20.557Z  INFO 17669 --- [crud-api] [           main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
+2026-01-18T17:07:20.657Z  INFO 17669 --- [crud-api] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-01-18T17:07:20.691Z  INFO 17669 --- [crud-api] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.1.Final
+2026-01-18T17:07:20.715Z  INFO 17669 --- [crud-api] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-01-18T17:07:20.876Z  INFO 17669 --- [crud-api] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-01-18T17:07:20.913Z  WARN 17669 --- [crud-api] [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-01-18T17:07:21.646Z  INFO 17669 --- [crud-api] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-01-18T17:07:21.689Z  INFO 17669 --- [crud-api] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-01-18T17:07:21.995Z  WARN 17669 --- [crud-api] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-01-18T17:07:22.273Z  WARN 17669 --- [crud-api] [           main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2026-01-18T17:07:22.274Z  INFO 17669 --- [crud-api] [           main] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-01-18T17:07:22.276Z  INFO 17669 --- [crud-api] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-01-18T17:07:22.278Z  INFO 17669 --- [crud-api] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-01-18T17:07:22.287Z  INFO 17669 --- [crud-api] [           main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-01-18T17:07:22.298Z ERROR 17669 --- [crud-api] [           main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  11.329 s
+[INFO] Finished at: 2026-01-18T17:07:22Z
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:3.2.1:run (default-cli) on project crud-api: Process terminated with exit code: 1 -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the '-e' switch
+[ERROR] Re-run Maven using the '-X' switch to enable verbose output
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException

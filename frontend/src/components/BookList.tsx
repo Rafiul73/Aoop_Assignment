@@ -7,6 +7,16 @@ interface BookListProps {
 }
 
 function BookList({ books, onEdit, onDelete }: BookListProps) {
+  const getStockStatus = (inStock: boolean | undefined) => {
+    return inStock ? '✅ In Stock' : '❌ Out of Stock';
+  };
+
+  const getRatingStars = (rating: number | undefined) => {
+    if (!rating) return '☆☆☆☆☆';
+    const stars = Math.round(rating);
+    return '★'.repeat(stars) + '☆'.repeat(5 - stars);
+  };
+
   if (books.length === 0) {
     return (
       <div className="book-list empty">
@@ -26,6 +36,12 @@ function BookList({ books, onEdit, onDelete }: BookListProps) {
           <div key={book.id} className="book-card">
             <div className="book-card-header">
               <h3>{book.title}</h3>
+              <div className="book-meta">
+                {book.category && <span className="badge category">{book.category}</span>}
+                <span className={`badge stock ${book.inStock ? 'in-stock' : 'out-stock'}`}>
+                  {getStockStatus(book.inStock)}
+                </span>
+              </div>
             </div>
             <div className="book-card-body">
               <p>
@@ -42,6 +58,16 @@ function BookList({ books, onEdit, onDelete }: BookListProps) {
               {book.pageCount && (
                 <p>
                   <strong>Pages:</strong> {book.pageCount}
+                </p>
+              )}
+              {book.stockQuantity !== undefined && (
+                <p>
+                  <strong>Stock:</strong> {book.stockQuantity} units
+                </p>
+              )}
+              {book.rating && book.rating > 0 && (
+                <p>
+                  <strong>Rating:</strong> {getRatingStars(book.rating)} ({book.rating.toFixed(1)}/5)
                 </p>
               )}
               {book.description && (

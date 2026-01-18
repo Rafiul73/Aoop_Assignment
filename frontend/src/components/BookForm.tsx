@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Book } from '../services/bookService';
+import { Book, bookService } from '../services/bookService';
 
 interface BookFormProps {
   book: Book | null;
@@ -15,7 +15,17 @@ function BookForm({ book, onSubmit, onCancel }: BookFormProps) {
     price: undefined,
     pageCount: undefined,
     description: '',
+    category: '',
+    stockQuantity: 0,
+    inStock: true,
+    rating: 0,
   });
+
+  const [categories, setCategories] = useState<string[]>([]);
+
+  useEffect(() => {
+    loadCategories();
+  }, []);
 
   useEffect(() => {
     if (book) {
@@ -28,17 +38,34 @@ function BookForm({ book, onSubmit, onCancel }: BookFormProps) {
         price: undefined,
         pageCount: undefined,
         description: '',
+        category: '',
+        stockQuantity: 0,
+        inStock: true,
+        rating: 0,
       });
     }
   }, [book]);
 
+  const loadCategories = async () => {
+    try {
+      const cats = await bookService.getCategories();
+      setCategories(cats);
+    } catch (err) {
+      console.error('Failed to load categories:', err);
+    }
+  };
+
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
-    const { name, value } = e.target;
+    const { name, value, type } = e.target;
     setFormData({
       ...formData,
-      [name]: name === 'price' || name === 'pageCount' ? (value ? parseFloat(value) : undefined) : value,
+      [name]: type === 'checkbox' 
+        ? (e.target as HTMLInputElement).checked 
+        : name === 'price' || name === 'pageCount' || name === 'stockQuantity' || name === 'rating'
+          ? (value ? parseFloat(value) : undefined)
+          : value,
     });
   };
 
@@ -56,6 +83,10 @@ function BookForm({ book, onSubmit, onCancel }: BookFormProps) {
       price: undefined,
       pageCount: undefined,
       description: '',
+      category: '',
+      stockQuantity: 0,
+      inStock: true,
+      rating: 0,
     });
   };
 
@@ -67,6 +98,10 @@ function BookForm({ book, onSubmit, onCancel }: BookFormProps) {
       price: undefined,
       pageCount: undefined,
       description: '',
+      category: '',
+      stockQuantity: 0,
+      inStock: true,
+      rating: 0,
     });
     onCancel();
   };
@@ -139,6 +174,66 @@ function BookForm({ book, onSubmit, onCancel }: BookFormProps) {
             placeholder="0"
           />
         </div>
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="category">Category</label>
+        <select
+          id="category"
+          name="category"
+          value={formData.category || ''}
+          onChange={handleChange}
+        >
+          <option value="">Select a category...</option>
+          {categories.map((cat) => (
+            <option key={cat} value={cat}>
+              {cat}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className="form-row">
+        <div className="form-group">
+          <label htmlFor="stockQuantity">Stock Quantity</label>
+          <input
+            type="number"
+            id="stockQuantity"
+            name="stockQuantity"
+            value={formData.stockQuantity || 0}
+            onChange={handleChange}
+            placeholder="0"
+            min="0"
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="rating">Rating (0-5)</label>
+          <input
+            type="number"
+            id="rating"
+            name="rating"
+            value={formData.rating || 0}
+            onChange={handleChange}
+            placeholder="0"
+            min="0"
+            max="5"
+            step="0.1"
+          />
+        </div>
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="inStock">
+          <input
+            type="checkbox"
+            id="inStock"
+            name="inStock"
+            checked={formData.inStock || false}
+            onChange={handleChange}
+          />
+          {' '}In Stock
+        </label>
       </div>
 
       <div className="form-group">

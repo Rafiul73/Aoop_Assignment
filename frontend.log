@@ -23,5 +23,5 @@ Port 3000 is in use, trying another one...
 
   VITE v5.4.21  ready in 199 ms
 
-  ➜  Local:   http://localhost:3001/
-  ➜  Network: http://10.0.0.98:3001/
+  ➜  Local:   http://localhost:305:18:13 PM [vite] hmr update /src/component5:18:13 PM5:18:13 PM [vite] hmr update /src/component5:18:13 PM5:18:30 PM [vite] hmr update /src/components/BookForm.tsx
+5:18:41 PM [vite] hmr update /src/component5:18:41 PM [vit5:18:58 PM [vite] hmr update /src/component5:18:58 PM5:19:07 PM [vite] hmr update /src/component5:19:07 PM [vite] hmr update /src/components/App.css

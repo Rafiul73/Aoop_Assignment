@@ -3,6 +3,7 @@ package com.aoop.crudapi.controller;
 import com.aoop.crudapi.entity.Book;
 import com.aoop.crudapi.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -53,6 +54,10 @@ public class BookController {
             book.setPrice(bookDetails.getPrice());
             book.setPageCount(bookDetails.getPageCount());
             book.setDescription(bookDetails.getDescription());
+            book.setCategory(bookDetails.getCategory());
+            book.setStockQuantity(bookDetails.getStockQuantity());
+            book.setInStock(bookDetails.getInStock());
+            book.setRating(bookDetails.getRating());
             
             Book updatedBook = bookRepository.save(book);
             return ResponseEntity.ok(updatedBook);
@@ -87,6 +92,18 @@ public class BookController {
             if (bookDetails.getDescription() != null) {
                 book.setDescription(bookDetails.getDescription());
             }
+            if (bookDetails.getCategory() != null) {
+                book.setCategory(bookDetails.getCategory());
+            }
+            if (bookDetails.getStockQuantity() != null) {
+                book.setStockQuantity(bookDetails.getStockQuantity());
+            }
+            if (bookDetails.getInStock() != null) {
+                book.setInStock(bookDetails.getInStock());
+            }
+            if (bookDetails.getRating() != null) {
+                book.setRating(bookDetails.getRating());
+            }
             
             Book updatedBook = bookRepository.save(book);
             return ResponseEntity.ok(updatedBook);
@@ -103,6 +120,103 @@ public class BookController {
         if (book.isPresent()) {
             bookRepository.deleteById(id);
             return ResponseEntity.noContent().build();
+        }
+        
+        return ResponseEntity.notFound().build();
+    }
+    
+    // SEARCH - Search books by title, author, or ISBN
+    @GetMapping("/search")
+    public ResponseEntity<List<Book>> searchBooks(@RequestParam String query) {
+        List<Book> books = bookRepository.searchBooks(query);
+        return ResponseEntity.ok(books);
+    }
+    
+    // FILTER - Filter by category
+    @GetMapping("/filter/category")
+    public ResponseEntity<List<Book>> filterByCategory(@RequestParam String category) {
+        List<Book> books = bookRepository.findByCategory(category);
+        return ResponseEntity.ok(books);
+    }
+    
+    // FILTER - Filter by stock status
+    @GetMapping("/filter/stock")
+    public ResponseEntity<List<Book>> filterByStock(@RequestParam Boolean inStock) {
+        List<Book> books = bookRepository.findByInStock(inStock);
+        return ResponseEntity.ok(books);
+    }
+    
+    // FILTER - Filter by price range
+    @GetMapping("/filter/price")
+    public ResponseEntity<List<Book>> filterByPriceRange(
+            @RequestParam Double minPrice,
+            @RequestParam Double maxPrice) {
+        List<Book> books = bookRepository.findByPriceRange(minPrice, maxPrice);
+        return ResponseEntity.ok(books);
+    }
+    
+    // FILTER - Filter by minimum rating
+    @GetMapping("/filter/rating")
+    public ResponseEntity<List<Book>> filterByRating(@RequestParam Double minRating) {
+        List<Book> books = bookRepository.findByMinimumRating(minRating);
+        return ResponseEntity.ok(books);
+    }
+    
+    // GET all categories
+    @GetMapping("/categories")
+    public ResponseEntity<List<String>> getCategories() {
+        List<String> categories = bookRepository.findAllCategories();
+        return ResponseEntity.ok(categories);
+    }
+    
+    // MANAGE STOCK - Update stock quantity
+    @PutMapping("/{id}/stock")
+    public ResponseEntity<Book> updateStock(@PathVariable Long id, @RequestParam Integer quantity) {
+        Optional<Book> existingBook = bookRepository.findById(id);
+        
+        if (existingBook.isPresent()) {
+            Book book = existingBook.get();
+            book.setStockQuantity(quantity);
+            Book updatedBook = bookRepository.save(book);
+            return ResponseEntity.ok(updatedBook);
+        }
+        
+        return ResponseEntity.notFound().build();
+    }
+    
+    // MANAGE STOCK - Buy book (decrease stock)
+    @PostMapping("/{id}/buy")
+    public ResponseEntity<Book> buyBook(@PathVariable Long id, @RequestParam Integer quantity) {
+        Optional<Book> existingBook = bookRepository.findById(id);
+        
+        if (existingBook.isPresent()) {
+            Book book = existingBook.get();
+            if (book.getStockQuantity() >= quantity) {
+                book.setStockQuantity(book.getStockQuantity() - quantity);
+                Book updatedBook = bookRepository.save(book);
+                return ResponseEntity.ok(updatedBook);
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            }
+        }
+        
+        return ResponseEntity.notFound().build();
+    }
+    
+    // MANAGE RATING - Update book rating
+    @PutMapping("/{id}/rating")
+    public ResponseEntity<Book> updateRating(@PathVariable Long id, @RequestParam Double rating) {
+        Optional<Book> existingBook = bookRepository.findById(id);
+        
+        if (existingBook.isPresent()) {
+            Book book = existingBook.get();
+            if (rating >= 0 && rating <= 5) {
+                book.setRating(rating);
+                Book updatedBook = bookRepository.save(book);
+                return ResponseEntity.ok(updatedBook);
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            }
         }
         
         return ResponseEntity.notFound().build();

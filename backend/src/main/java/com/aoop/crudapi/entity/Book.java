@@ -15,7 +15,7 @@ public class Book {
     @Column(nullable = false)
     private String author;
     
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String isbn;
     
     private Double price;
@@ -23,11 +23,24 @@ public class Book {
     private Integer pageCount;
     
     private String description;
+    
+    @Column(name = "category")
+    private String category;
+    
+    @Column(name = "stock_quantity", nullable = false)
+    private Integer stockQuantity = 0;
+    
+    @Column(name = "in_stock")
+    private Boolean inStock = true;
+    
+    @Column(name = "rating")
+    private Double rating = 0.0;
 
     // Constructors
     public Book() {}
 
-    public Book(Long id, String title, String author, String isbn, Double price, Integer pageCount, String description) {
+    public Book(Long id, String title, String author, String isbn, Double price, Integer pageCount, 
+                String description, String category, Integer stockQuantity, Boolean inStock, Double rating) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -35,6 +48,10 @@ public class Book {
         this.price = price;
         this.pageCount = pageCount;
         this.description = description;
+        this.category = category;
+        this.stockQuantity = stockQuantity;
+        this.inStock = inStock;
+        this.rating = rating;
     }
 
     // Getters
@@ -65,6 +82,22 @@ public class Book {
     public String getDescription() {
         return description;
     }
+    
+    public String getCategory() {
+        return category;
+    }
+    
+    public Integer getStockQuantity() {
+        return stockQuantity;
+    }
+    
+    public Boolean getInStock() {
+        return inStock;
+    }
+    
+    public Double getRating() {
+        return rating;
+    }
 
     // Setters
     public void setId(Long id) {
@@ -93,5 +126,22 @@ public class Book {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+    
+    public void setCategory(String category) {
+        this.category = category;
+    }
+    
+    public void setStockQuantity(Integer stockQuantity) {
+        this.stockQuantity = stockQuantity;
+        this.inStock = stockQuantity > 0;
+    }
+    
+    public void setInStock(Boolean inStock) {
+        this.inStock = inStock;
+    }
+    
+    public void setRating(Double rating) {
+        this.rating = rating;
     }
 }

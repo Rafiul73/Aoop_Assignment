@@ -10,6 +10,10 @@ export interface Book {
   price?: number;
   pageCount?: number;
   description?: string;
+  category?: string;
+  stockQuantity?: number;
+  inStock?: boolean;
+  rating?: number;
 }
 
 const apiClient = axios.create({
@@ -53,5 +57,75 @@ export const bookService = {
   // DELETE book
   deleteBook: async (id: number): Promise<void> => {
     await apiClient.delete(`/${id}`);
+  },
+
+  // SEARCH - Search books
+  searchBooks: async (query: string): Promise<Book[]> => {
+    const response = await apiClient.get<Book[]>('/search', {
+      params: { query },
+    });
+    return response.data;
+  },
+
+  // FILTER - Filter by category
+  filterByCategory: async (category: string): Promise<Book[]> => {
+    const response = await apiClient.get<Book[]>('/filter/category', {
+      params: { category },
+    });
+    return response.data;
+  },
+
+  // FILTER - Filter by stock status
+  filterByStock: async (inStock: boolean): Promise<Book[]> => {
+    const response = await apiClient.get<Book[]>('/filter/stock', {
+      params: { inStock },
+    });
+    return response.data;
+  },
+
+  // FILTER - Filter by price range
+  filterByPriceRange: async (minPrice: number, maxPrice: number): Promise<Book[]> => {
+    const response = await apiClient.get<Book[]>('/filter/price', {
+      params: { minPrice, maxPrice },
+    });
+    return response.data;
+  },
+
+  // FILTER - Filter by rating
+  filterByRating: async (minRating: number): Promise<Book[]> => {
+    const response = await apiClient.get<Book[]>('/filter/rating', {
+      params: { minRating },
+    });
+    return response.data;
+  },
+
+  // GET all categories
+  getCategories: async (): Promise<string[]> => {
+    const response = await apiClient.get<string[]>('/categories');
+    return response.data;
+  },
+
+  // MANAGE STOCK - Update stock
+  updateStock: async (id: number, quantity: number): Promise<Book> => {
+    const response = await apiClient.put<Book>(`/${id}/stock`, null, {
+      params: { quantity },
+    });
+    return response.data;
+  },
+
+  // MANAGE STOCK - Buy book
+  buyBook: async (id: number, quantity: number): Promise<Book> => {
+    const response = await apiClient.post<Book>(`/${id}/buy`, null, {
+      params: { quantity },
+    });
+    return response.data;
+  },
+
+  // MANAGE RATING - Update rating
+  updateRating: async (id: number, rating: number): Promise<Book> => {
+    const response = await apiClient.put<Book>(`/${id}/rating`, null, {
+      params: { rating },
+    });
+    return response.data;
   },
 };

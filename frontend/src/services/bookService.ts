@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8080/api/books';
+// Use /api for dev (proxies to backend), full URL for production
+const API_URL = '/api/books';
 
 export interface Book {
   id?: number;
